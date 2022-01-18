@@ -1,6 +1,6 @@
 
 /*
-  Osmos
+  Orbs
 */
 #include <Arduboy2.h>
 
