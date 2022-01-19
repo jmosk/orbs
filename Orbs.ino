@@ -5,8 +5,6 @@
 #include <Arduboy2.h>
 
 Arduboy2 alib;
-Arduboy2Base base;
-Arduboy2Core core;
 
 // Game configurable parameters
 #define MaxOrbs 20
@@ -269,7 +267,7 @@ void loop() {
     lastMs=millis();
     nextFrameCount=0;
     if (++totalSec - lastSec  > INVINCIBLE_DELAY) invincible = FALSE;    // My orb is invinceable for the 1st 5 seconds
-    core.digitalWriteRGB(GREEN_LED, RGB_OFF);
+    alib.digitalWriteRGB(GREEN_LED, RGB_OFF);
     if (countDown) {
       if (!--countDownCount) countDown = FALSE;  // Counted downt to zero
     }
@@ -290,12 +288,12 @@ void loop() {
     else {
       if (blueBlink) {
         blueBlink = OFF;
-        core.digitalWriteRGB(BLUE_LED, RGB_OFF);
+        alib.digitalWriteRGB(BLUE_LED, RGB_OFF);
         blueBlinkCounter = DIM_BLINK;
       }
       else {
         blueBlink = ON;
-        core.digitalWriteRGB(BLUE_LED, RGB_ON);
+        alib.digitalWriteRGB(BLUE_LED, RGB_ON);
         blueBlinkCounter = DIM_BLINK;
       }
     }
@@ -310,7 +308,7 @@ void loop() {
       if (orbsTouch(orbs[i].x,orbs[i].y,orbs[i].orbRadius,
                     orbs[j].x,orbs[j].y,orbs[j].orbRadius)){
          // Collision has occureed
-         core.digitalWriteRGB(GREEN_LED, RGB_ON); 
+         alib.digitalWriteRGB(GREEN_LED, RGB_ON); 
          // One orb is abut to consume the other orb 
          // Make the larger one larger - eliminate the smaller one
          if(orbs[i].orbRadius > orbs[j].orbRadius){
@@ -333,7 +331,7 @@ void loop() {
       if (orbsTouch(orbs[i].x,orbs[i].y,orbs[i].orbRadius,
                     me->x,me->y,me->orbRadius)){
          // Collision has occureed
-         core.digitalWriteRGB(GREEN_LED, RGB_ON); 
+         alib.digitalWriteRGB(GREEN_LED, RGB_ON); 
          // One orb is abut to consume the other orb 
          // Make the larger one larger - eliminate the smaller one
          if(orbs[i].orbRadius > me->orbRadius){
@@ -438,7 +436,7 @@ void loop() {
   if (alib.pressed(A_BUTTON)){
     shooterMode = FALSE;
     missile.active = FALSE;
-    core.digitalWriteRGB(BLUE_LED, RGB_OFF);
+    alib.digitalWriteRGB(BLUE_LED, RGB_OFF);
     }
 
   if (alib.pressed(B_BUTTON)){
@@ -699,6 +697,7 @@ void loop() {
   }
 }
 
+// Render the display
 void renderOrbs(){
   // Display Wins and Losses first - orbs overwrite them
   char buf[4];
@@ -726,15 +725,15 @@ void renderOrbs(){
   for (i=0; i<MaxOrbs;i++){
     if (orbs[i].active){
       if (me->orbRadius<orbs[i].orbRadius){
-        base.fillCircle(orbs[i].x, orbs[i].y, orbs[i].orbRadius, WHITE);  
+        alib.fillCircle(orbs[i].x, orbs[i].y, orbs[i].orbRadius, WHITE);  
       }
-     else base.drawCircle(orbs[i].x, orbs[i].y, orbs[i].orbRadius, WHITE);
+     else alib.drawCircle(orbs[i].x, orbs[i].y, orbs[i].orbRadius, WHITE);
     }
   } 
   if (invincible || shooterMode){
-    base.drawCircle(me->x, me->y, me->orbRadius+1, WHITE);
+    alib.drawCircle(me->x, me->y, me->orbRadius+1, WHITE);
   }
-  base.drawCircle(me->x, me->y, me->orbRadius, WHITE);
+  alib.drawCircle(me->x, me->y, me->orbRadius, WHITE);
   for (i=0;i<5;i++){
     // Make the inside of my Orb sparkle
     x=random(1,me->orbRadius-1);
@@ -744,7 +743,7 @@ void renderOrbs(){
     alib.drawPixel(me->x+x,me->y+y,WHITE);  
   }
   // Draw missile
-  if (missile.active) base.drawCircle(missile.x, missile.y, missile.orbRadius, WHITE); 
+  if (missile.active) alib.drawCircle(missile.x, missile.y, missile.orbRadius, WHITE); 
 
   // Display count down count at start of first game
   if (countDown){
