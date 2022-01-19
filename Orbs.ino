@@ -76,7 +76,7 @@ float cos45 = 0.7071;   // cos 45 dgrees. radius*cos 45 degree is offset to poin
 // http://fuopy.github.io/arduboy-image-converter/ Convert PNS to Arduboy2 bitmap format
 //
 
-// Each byte is one column 8-pixels high with the low order bit being the upper top picel of that column.
+// Each byte is one column 8-pixels high with the low order bit being the upper top pixel of that column.
 // Each group is the 128 columns. 8 groups make up the 64 bit height of the image.
 
 const PROGMEM unsigned char logo[] = {
