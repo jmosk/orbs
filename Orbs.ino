@@ -1,6 +1,12 @@
 
 /*
   Orbs
+  
+  Licensed under the Open Software License version 3.0
+  01-23-22 08:45
+  Jay Moskowitz - Wireless Marvels Inc.
+  jay@wirelessmarvels.com
+ 
 */
 #include <Arduboy2.h>
 
