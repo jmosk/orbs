@@ -66,7 +66,7 @@ char blueBlinkCounter;
 char countDownCount;
 
 void soundTest();
-void newGme();
+void newGame();
 void renderOrbs();
 bool orbsTouch(int x0, int y0, int r0, int x1, int y1, int r1);
 void absorbOrb(int larger, int smaller);
